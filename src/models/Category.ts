@@ -4,29 +4,15 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
-import Category from './Category';
 
 @Entity('transactions')
-class Transaction {
+class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   title: string;
-
-  @Column('decimal')
-  value: number;
-
-  @Column()
-  type: 'income' | 'outcome';
-
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  @Column('uuid')
-  category_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -35,4 +21,4 @@ class Transaction {
   updated_at: Date;
 }
 
-export default Transaction;
+export default Category;

@@ -1,5 +1,6 @@
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
+import AppError from '../errors/AppError';
 
 interface RequestDTO {
   title: string;
@@ -22,11 +23,11 @@ class CreateTransactionService {
     const { total } = this.transactionsRepository.getBalance();
 
     if (type === 'outcome' && total < value) {
-      throw new Error('You do not have enough value');
+      throw new AppError('You do not have enough value', 401);
     }
 
     if (typeof value !== 'number') {
-      throw new Error('Value is not a valid number!');
+      throw new AppError('Value is not a valid number!', 401);
     }
 
     const transaction = this.transactionsRepository.create({
