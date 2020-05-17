@@ -17,15 +17,17 @@ class Transaction {
   @Column()
   title: string;
 
-  @Column('decimal')
-  value: number;
-
   @Column()
   type: 'income' | 'outcome';
 
+  @Column('decimal')
+  value: number;
+
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
-  @Column('uuid')
+  category: Category;
+
+  @Column()
   category_id: string;
 
   @CreateDateColumn()
